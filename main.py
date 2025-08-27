@@ -1,6 +1,6 @@
 from decouple import config
 import json
-from telegram import ForceReply, Update
+from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 TOKEN = config("TOKEN")
@@ -14,7 +14,7 @@ async def my_score_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         user = update.effective_user
         runner_id = update.message.from_user.id
         if records == []:
-            await update.message.reply_html(rf"Не має жодного запису про бігунів!😔")
+            await update.message.reply_html("Не має жодного запису про бігунів!😔\nНапиши команду /help щоб дізнатися як додати свої результати!")
         else:
             for record in records:
                 if record["runner_id"] == runner_id:
@@ -29,7 +29,7 @@ async def my_score_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Shows the help message when the command /help is issued."""
-    await update.message.reply_text("Привіт! Цей бот записує відстань яку ти пробіг!\nЩоб записати відстань треба написати повідомлення типу:\nПробіг 10.0 (10.0 - відстань у км)\nПобігли?😎")
+    await update.message.reply_text("Привіт! Цей бот записує відстань яку ти пробіг!\nЩоб записати відстань треба написати повідомлення типу:\nПробіг 10.0 (10.0 - відстань у км)\nЩоб подивитися свій загальний результат треба написати команду /my_score\nПобігли?😎")
 
 
 async def record_distance(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
