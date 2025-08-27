@@ -8,7 +8,7 @@ records_file = "run_records.json"
 
 
 async def my_score_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /start is issued."""
+    """Shows the runner score when the command /my_score is issued."""
     with open(records_file, "r") as read_file:
         records = json.load(read_file)
         user = update.effective_user
@@ -28,12 +28,12 @@ async def my_score_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
+    """Shows the help message when the command /help is issued."""
     await update.message.reply_text("Привіт! Цей бот записує відстань яку ти пробіг!\nЩоб записати відстань треба написати повідомлення типу:\nПробіг 10.0 (10.0 - відстань у км)\nПобігли?😎")
 
 
 async def record_distance(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Echo the user message."""
+    """Records runners score."""
     user_input = update.message.text
     if "Пробіг" in user_input:
         user_input = user_input.replace("Пробіг", "")
