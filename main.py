@@ -118,8 +118,8 @@ async def record_distance(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                         new_record = {
                             "runner_name" : runner_name,
                             "runner_id" : runner_id,
-                            "week_score" : runner_score,
-                            "month_score" : runner_score,
+                            "week_score" : round(runner_score,3),
+                            "month_score" : round(runner_score,3),
                             "week_day" : current_day,
                             "current_month" : current_month
                         }
@@ -139,15 +139,15 @@ async def record_distance(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                                     break
                                 else:
                                     if current_day - record["week_day"] == 7:
-                                        record["week_score"] = runner_score
-                                        record["month_score"] += runner_score
+                                        record["week_score"] = round(runner_score,3)
+                                        record["month_score"] += round(runner_score,3)
                                         record["week_day"] = current_day
                                         this_user_week_score = record["week_score"]
                                         this_user_month_score = record["month_score"]
                                         break
                                     else:
-                                        record["week_score"] += runner_score
-                                        record["month_score"] += runner_score
+                                        record["week_score"] += round(runner_score,3)
+                                        record["month_score"] += round(runner_score,3)
                                         this_user_week_score = record["week_score"]
                                         this_user_month_score = record["month_score"]
                                         break
@@ -155,8 +155,8 @@ async def record_distance(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                             new_record = {
                                 "runner_name" : runner_name,
                                 "runner_id" : runner_id,
-                                "week_score" : runner_score,
-                                "month_score" : runner_score,
+                                "week_score" : round(runner_score,3),
+                                "month_score" : round(runner_score,3),
                                 "week_day" : current_day,
                                 "current_month" : current_month
                             }
@@ -166,7 +166,7 @@ async def record_distance(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 with open(records_file, "w") as write_file:
                     json.dump(records, write_file)
                 await update.message.reply_text(
-                    "Результат записано!😌\nТвій результат : " + str(runner_score) + " км!\nТвій результат за тиждень : " + str(this_user_week_score) + " км!\nТвій результат за місяць : " + rf"{this_user_month_score} км!💪"+ "\nІнстаграм: https://www.instagram.com/southrunners2025?igsh=MW1xcGJ1eGdkbThyag==\nІнстаграм розробника: https://www.instagram.com/kalika_perehoji/",
+                    "Результат записано!😌\nТвій результат : " + str(round(runner_score,3)) + " км!\nТвій результат за тиждень : " + str(this_user_week_score) + " км!\nТвій результат за місяць : " + rf"{this_user_month_score} км!💪"+ "\nІнстаграм: https://www.instagram.com/southrunners2025?igsh=MW1xcGJ1eGdkbThyag==\nІнстаграм розробника: https://www.instagram.com/kalika_perehoji/",
                 )
 
 
