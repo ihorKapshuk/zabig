@@ -63,6 +63,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 
 async def runners_score_table(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Shows runners table"""
     with open(records_file, "r") as read_file:
         records = json.load(read_file)
         sorted_records = merge_sort(records)
