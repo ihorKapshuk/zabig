@@ -70,13 +70,13 @@ async def runners_score_table(update: Update, context: ContextTypes.DEFAULT_TYPE
     result = "РЕЙТИНГОВА ТАБЛИЦЯ\n"
     for i, record in enumerate(sorted_records):
         if i == 0:
-            result += str(i + 1) + " " + record["runner_name"] + " " + str(record["month_score"]) + " км " + "🥇\n"
+            result += str(i + 1) + " " + record["runner_name"] + " " + str(round(record["month_score"], 3)) + " км " + "🥇\n"
         elif i == 1:
-            result += str(i + 1) + " " + record["runner_name"] + " " + str(record["month_score"]) + " км " + "🥈\n"
+            result += str(i + 1) + " " + record["runner_name"] + " " + str(round(record["month_score"], 3)) + " км " + "🥈\n"
         elif i == 2:
-            result += str(i + 1) + " " + record["runner_name"] + " " + str(record["month_score"]) + " км " + "🥉\n"
+            result += str(i + 1) + " " + record["runner_name"] + " " + str(round(record["month_score"], 3)) + " км " + "🥉\n"
         else:
-            result += str(i + 1) + " " + record["runner_name"] + " " + str(record["month_score"]) + " км\n"
+            result += str(i + 1) + " " + record["runner_name"] + " " + str(round(record["month_score"], 3)) + " км\n"
     if result == "РЕЙТИНГОВА ТАБЛИЦЯ\n":
         await update.message.reply_text(
             "Таблиця ще пуста!"
@@ -167,7 +167,7 @@ async def record_distance(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 with open(records_file, "w") as write_file:
                     json.dump(records, write_file)
                 await update.message.reply_text(
-                    "Результат записано!😌\nТвій результат : " + str(round(runner_score,3)) + " км!\nТвій результат за тиждень : " + str(this_user_week_score) + " км!\nТвій результат за місяць : " + rf"{this_user_month_score} км!💪"+ "\nІнстаграм: https://www.instagram.com/southrunners2025?igsh=MW1xcGJ1eGdkbThyag==\nІнстаграм розробника: https://www.instagram.com/kalika_perehoji/",
+                    "Результат записано!😌\nТвій результат : " + str(round(runner_score,3)) + " км!\nТвій результат за тиждень : " + str(round(this_user_week_score, 3)) + " км!\nТвій результат за місяць : " + rf"{round(this_user_month_score, 3)} км!💪"+ "\nІнстаграм: https://www.instagram.com/southrunners2025?igsh=MW1xcGJ1eGdkbThyag==\nІнстаграм розробника: https://www.instagram.com/kalika_perehoji/",
                 )
 
 
